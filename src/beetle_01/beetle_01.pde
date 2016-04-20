@@ -50,17 +50,23 @@ Color getColorOfHumidity(int pm) {
   return clr;
 }
 
+ArrayList<Color> colors = new ArrayList<Color>();
 
 void setup()
 {
   size(200, 200);
-  background(0);
+  background(255);
   stroke(255);
   frameRate(12);
 
-  //Use Jason Array to read the data in
+ 
+}
+
+void draw() {
+   //Use Jason Array to read the data in
   json = loadJSONArray("http://aqicn.org/publishingdata/json/");
   //Use for loop to go through each data set in the array
+  colors.clear();
   for (int i = 0; i< json.size(); i++) {
     JSONObject dataSet = json.getJSONObject(i);
     String id = dataSet.getString("id");
@@ -76,26 +82,35 @@ void setup()
       float polValue = polData.getFloat("value");
 
       println(id + "," + name + "," + polType + "," + polValue);
-      if (polType.compareTo("PM2.5") == 0) {
-        Color clr = getColor(int(polValue));
+      if (polType.compareTo("Humidity") == 0) {
+        Color clr = getColorOfHumidity(int(polValue));
         fill(clr.r, clr.g, clr.b);
-        rect(0,0,100,100);
+        colors.add(clr);
       } else if (polType.compareTo("Ozone") == 0) {
         Color clr = getColor(int(polValue));
         fill(clr.r, clr.g, clr.b);
-        rect(100,0,100,100);
+        colors.add(clr);
       } else if (polType.compareTo("PM10") == 0) {
         Color clr = getColor(int(polValue));
         fill(clr.r, clr.g, clr.b);
-        rect(0,100,100,100);
-      } else if (polType.compareTo("Humidity") == 0) {
-        Color clr = getColorOfHumidity(int(polValue));
+        colors.add(clr);
+      } else if (polType.compareTo("PM2.5") == 0) {
+        Color clr = getColor(int(polValue));
         fill(clr.r, clr.g, clr.b);
-        rect(100,100,100,100);
+        colors.add(clr);
       }
     }
   }
-}
-
-void draw() {
+  
+  ellipseMode(RADIUS);
+  fill(colors.get(0).r, colors.get(0).g, colors.get(0).b);
+  ellipse(100, 100, 90, 90);
+  fill(colors.get(1).r, colors.get(1).g, colors.get(1).b);
+  ellipse(110, 100, 70, 70);
+  fill(colors.get(2).r, colors.get(2).g, colors.get(2).b);
+  ellipse(120, 100, 50, 50);
+  fill(colors.get(3).r, colors.get(3).g, colors.get(3).b);
+  ellipse(130, 100, 30, 30);
+  
+  delay(5000);
 }

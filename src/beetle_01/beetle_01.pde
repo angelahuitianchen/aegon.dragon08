@@ -186,7 +186,7 @@ void setup()
 }
 
 void draw() {
-  /* //Use Jason Array to read the data in
+   //Use Jason Array to read the data in
    json = loadJSONArray("http://aqicn.org/publishingdata/json/");
    //Use for loop to go through each data set in the array
    colors.clear();
@@ -235,5 +235,5 @@ void draw() {
    fill(colors.get(3).r, colors.get(3).g, colors.get(3).b);
    ellipse(130, 100, 30, 30);
    
-   delay(5000);*/
+   delay(5000);
 }

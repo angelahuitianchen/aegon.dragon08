@@ -115,7 +115,10 @@ Weather getWeaher(String city) {
  "guangzhou", "fuzhou", "haikou"
  */
 void printAllCities() {
-  String [] cities = {"newyork"};
+  String [] cities = {"beijing", "shanghai", "tianjin", "chongqing", "haerbin", "changchun", "shenyang",
+ "huhehaote", "shijiazhuang", "wulumuqi", "lanzhou", "xining", "xian","yinchuan", "zhengzhou", "jinan",
+ "taiyuan", "wuhan", "changsha", "nanjing", "chengdu", "guiyang", "kunming", "nanning","hangzhou", 
+ "guangzhou", "fuzhou", "haikou"};
   for (int i=0; i!=cities.length; ++i) {
     Weather we = getWeaher(cities[i]);
     println(cities[i] + " " + we.toString());

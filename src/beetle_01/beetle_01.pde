@@ -9,12 +9,13 @@ class Weather {
   private int so2;
   private int co;
   private int temp;
+  private String date;
 
   public Weather() {
   }
 
   public Weather(int pm25, int pm10, int o3, 
-    int no2, int so2, int co, int temp) {
+    int no2, int so2, int co, int temp, String date) {
     this.pm25 = pm25;
     this.pm10 = pm10;
     this.o3 = o3;
@@ -22,6 +23,7 @@ class Weather {
     this.so2 = so2;
     this.co = co;
     this.temp = temp;
+    this.date = date;
   }
 
   public int get_pm25() { 
@@ -45,6 +47,10 @@ class Weather {
   public int get_temp() { 
     return temp;
   }
+  public String get_date() {
+    return date;
+  }
+  
 
   public void set_pm25(int pm25) { 
     this.pm25 = pm25;
@@ -67,9 +73,13 @@ class Weather {
   public void set_temp(int temp) { 
     this.temp = temp;
   }
+  
+  public void set_date(String date) {
+    this.date = date;
+  }
 
   public String toString() {
-    return "pm25:" + pm25 + " pm10:" + pm10 + " no2:"
+    return "Date: " + date + "   pm25:" + pm25 + " pm10:" + pm10 + " no2:"
       + no2 + " o3:" + o3 + " so2:" + so2 + " co:"
       + co + " temp:" + temp;
   }
@@ -81,29 +91,30 @@ Weather getWeaher(String city) {
   try {
     jsonObj = loadJSONObject(url);
     try {
+      we.set_date((jsonObj.getJSONObject("iaqi").getJSONObject("pm25").getString("date")));
+    } catch (Exception e) {}
+    try {
       we.set_pm25((jsonObj.getJSONObject("iaqi").getJSONObject("pm25").getInt("val")));
     } catch (Exception e) {}
     try {
-    we.set_pm10((jsonObj.getJSONObject("iaqi").getJSONObject("pm10").getInt("val")));
-        } catch (Exception e) {}
+      we.set_pm10((jsonObj.getJSONObject("iaqi").getJSONObject("pm10").getInt("val")));
+    } catch (Exception e) {}
     try {
     we.set_no2((jsonObj.getJSONObject("iaqi").getJSONObject("no2").getInt("val")));
-        } catch (Exception e) {}
+    } catch (Exception e) {}
     try {
-    we.set_o3((jsonObj.getJSONObject("iaqi").getJSONObject("o3").getInt("val")));
-        } catch (Exception e) {}
+      we.set_o3((jsonObj.getJSONObject("iaqi").getJSONObject("o3").getInt("val")));
+    } catch (Exception e) {}
     try {
-    we.set_so2((jsonObj.getJSONObject("iaqi").getJSONObject("so2").getInt("val")));
-        } catch (Exception e) {}
+      we.set_so2((jsonObj.getJSONObject("iaqi").getJSONObject("so2").getInt("val")));
+    } catch (Exception e) {}
     try {
-    we.set_co((jsonObj.getJSONObject("iaqi").getJSONObject("co").getInt("val")));
-        } catch (Exception e) {}
+      we.set_co((jsonObj.getJSONObject("iaqi").getJSONObject("co").getInt("val")));
+    } catch (Exception e) {}
     try {
-    we.set_temp((jsonObj.getJSONObject("weather").getInt("tempnow")));
-        } catch (Exception e) {}
-  } 
-  catch(Exception e) {
-  }
+      we.set_temp((jsonObj.getJSONObject("weather").getInt("tempnow")));
+    } catch (Exception e) {}
+  } catch(Exception e) {}
   return we;
 }
 
@@ -189,54 +200,4 @@ void setup()
 }
 
 void draw() {
-   //Use Jason Array to read the data in
-   json = loadJSONArray("http://aqicn.org/publishingdata/json/");
-   //Use for loop to go through each data set in the array
-   colors.clear();
-   for (int i = 0; i< json.size(); i++) {
-   JSONObject dataSet = json.getJSONObject(i);
-   String id = dataSet.getString("id");
-   String name = dataSet.getString("cityName");
-   
-   //get pollution data (pollution data is another JSON array itself)
-   JSONArray pol = dataSet.getJSONArray("pollutants");
-   //background(255);
-   
-   for (int n = 0; n < pol.size (); n++) {
-   JSONObject polData = pol.getJSONObject(n);
-   String polType = polData.getString("pol");
-   float polValue = polData.getFloat("value");
-   
-   println(id + "," + name + "," + polType + "," + polValue);
-   if (polType.compareTo("Humidity") == 0) {
-   Color clr = getColorOfHumidity(int(polValue));
-   fill(clr.r, clr.g, clr.b);
-   colors.add(clr);
-   } else if (polType.compareTo("Ozone") == 0) {
-   Color clr = getColor(int(polValue));
-   fill(clr.r, clr.g, clr.b);
-   colors.add(clr);
-   } else if (polType.compareTo("PM10") == 0) {
-   Color clr = getColor(int(polValue));
-   fill(clr.r, clr.g, clr.b);
-   colors.add(clr);
-   } else if (polType.compareTo("PM2.5") == 0) {
-   Color clr = getColor(int(polValue));
-   fill(clr.r, clr.g, clr.b);
-   colors.add(clr);
-   }
-   }
-   }
-   
-   ellipseMode(RADIUS);
-   fill(colors.get(0).r, colors.get(0).g, colors.get(0).b);
-   ellipse(100, 100, 90, 90);
-   fill(colors.get(1).r, colors.get(1).g, colors.get(1).b);
-   ellipse(110, 100, 70, 70);
-   fill(colors.get(2).r, colors.get(2).g, colors.get(2).b);
-   ellipse(120, 100, 50, 50);
-   fill(colors.get(3).r, colors.get(3).g, colors.get(3).b);
-   ellipse(130, 100, 30, 30);
-   
-   delay(5000);
 }

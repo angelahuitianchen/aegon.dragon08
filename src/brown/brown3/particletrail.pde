@@ -31,8 +31,8 @@ class Pinchito{
     translate(x-width/2, y-height/2, z);
     rotateY(-rotating);
     tint(cr, cg, cb);
-    image(blur, 0, 0, lifec, lifec);
-    ellipse(0, 0, lifec, lifec);
+    //image(blur, 0, 0, lifec, lifec);
+    //ellipse(0, 0, lifec, lifec);
     popMatrix();
     lifec-=lifedec;
     if(lifec <= 0){

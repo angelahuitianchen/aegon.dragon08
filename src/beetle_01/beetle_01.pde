@@ -1,5 +1,4 @@
 JSONArray json;
-
 JSONObject jsonObj;
 
 class Weather {
@@ -52,7 +51,6 @@ class Weather {
     return date;
   }
 
-
   public void set_pm25(int pm25) { 
     this.pm25 = pm25;
   }
@@ -85,6 +83,57 @@ class Weather {
       + co + " temp:" + temp;
   }
 };
+
+Weather getWeaher(String city) {
+  Weather we = new Weather();
+  String url = "http://feed.aqicn.org/feed/" + city + "/en/feed.v1.json";
+  try {
+    jsonObj = loadJSONObject(url);
+    try {
+      we.set_date((jsonObj.getJSONObject("iaqi").getJSONObject("pm25").getString("date")));
+    } catch (Exception e) {}
+    try {
+      we.set_pm25((jsonObj.getJSONObject("iaqi").getJSONObject("pm25").getInt("val")));
+    } catch (Exception e) {}
+    try {
+      we.set_pm10((jsonObj.getJSONObject("iaqi").getJSONObject("pm10").getInt("val")));
+    } catch (Exception e) {}
+    try {
+    we.set_no2((jsonObj.getJSONObject("iaqi").getJSONObject("no2").getInt("val")));
+    } catch (Exception e) {}
+    try {
+      we.set_o3((jsonObj.getJSONObject("iaqi").getJSONObject("o3").getInt("val")));
+    } catch (Exception e) {}
+    try {
+      we.set_so2((jsonObj.getJSONObject("iaqi").getJSONObject("so2").getInt("val")));
+    } catch (Exception e) {}
+    try {
+      we.set_co((jsonObj.getJSONObject("iaqi").getJSONObject("co").getInt("val")));
+    } catch (Exception e) {}
+    try {
+      we.set_temp((jsonObj.getJSONObject("weather").getInt("tempnow")));
+    } catch (Exception e) {}
+  } catch(Exception e) {}
+  return we;
+}
+
+//taibei, aomen, xianggang
+/*
+"beijing", "shanghai", "tianjin", "chongqing", "haerbin", "changchun", "shenyang",
+ "huhehaote", "shijiazhuang", "wulumuqi", "lanzhou", "xining", "xian","yinchuan", "zhengzhou", "jinan",
+ "taiyuan", "wuhan", "changsha", "nanjing", "chengdu", "guiyang", "kunming", "nanning","hangzhou", 
+ "guangzhou", "fuzhou", "haikou"
+ */
+void printAllCities() {
+  String [] cities = {"beijing", "shanghai", "tianjin", "chongqing", "haerbin", "changchun", "shenyang",
+ "huhehaote", "shijiazhuang", "wulumuqi", "lanzhou", "xining", "xian","yinchuan", "zhengzhou", "jinan",
+ "taiyuan", "wuhan", "changsha", "nanjing", "chengdu", "guiyang", "kunming", "nanning","hangzhou", 
+ "guangzhou", "fuzhou", "haikou"};
+  for (int i=0; i!=cities.length; ++i) {
+    Weather we = getWeaher(cities[i]);
+    println(cities[i] + " " + we.toString());
+  }
+}
 
 class Color {
   public int r;
@@ -146,6 +195,7 @@ void setup()
   frameRate(12);
 }
 
+<<<<<<< HEAD
 String getShowCity() {
   String url = "http://cshelp00.com/test.php";
   String city = "beijing";
@@ -237,4 +287,6 @@ void draw() {
   ellipse(130, 100, 30, 30);
 
   delay(5000);
+
+  printAllCities();
 }

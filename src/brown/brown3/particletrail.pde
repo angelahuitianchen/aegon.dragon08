@@ -9,6 +9,7 @@ class Pinchito{
   color cor;
   float cr, cb, cg;
   
+  //在x,y,z出产生小圆圈,初始化大小为diam, 逐渐减少量为：lifedec
   Pinchito(int x, int y, int z, ArrayList pinchitos, color cor, int diam, float lifedec){
     this.x = x;
     this.y = y;
@@ -31,11 +32,12 @@ class Pinchito{
     rotateY(-rotating);
     tint(cr, cg, cb);
     image(blur, 0, 0, lifec, lifec);
-    //ellipse(0, 0, lifec, lifec);
+    ellipse(0, 0, lifec, lifec);
     popMatrix();
     lifec-=lifedec;
     if(lifec <= 0){
       pinchitos.remove(this);  
     }
   }  
+  
 }

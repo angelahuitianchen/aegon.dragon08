@@ -4,7 +4,7 @@ import javax.media.opengl.*;
 final boolean SAVEFRAME = true;
 final int STOPFRAME = 697;
 
-
+int circleNum = 300;
 
 PGraphicsOpenGL pgl;
 GL gl;
@@ -17,17 +17,15 @@ ArrayList pinchos;
 ArrayList pinchosp;
 
 void setup(){
-  size(1280, 720, OPENGL);
+  size(192, 192, OPENGL);
   hint(ENABLE_OPENGL_4X_SMOOTH);
   
   reader = createReader("fft.txt");
 
-  
-  
   background(0);
   noStroke();
   noSmooth();
-  frameRate(30);
+  frameRate(150);
   blur = loadImage("glow_orb_solid.png");
   imageMode(CENTER);
   pinchos = new ArrayList();
@@ -53,10 +51,9 @@ void draw(){
   gl.glDisable(GL.GL_DEPTH_TEST);
   pgl.endGL();
 
-  
   background(0);
   
-  
+  //一直旋转坐标轴
   pushMatrix();
   translate(width/2, height/2);
   rotateY(rotating);
@@ -65,8 +62,6 @@ void draw(){
     rotating = 0;  
   }
   String line;
-  
-  
   
   try {
     line = reader.readLine();
@@ -93,16 +88,21 @@ void draw(){
       if(!bandas[i].equals(" ") && !bandas[i].equals("")){
         float energy = float(bandas[i]);
         if(energy >= 0){
+          //生命15次，范围3， 分散程度，
+          if (pinchosp.size() < circleNum)
           new Pinchop(pinchosp, 15, 3, media*10, (int)(energy/10));   
+          println("pinchosp: " + pinchosp.size());
         }
         if(energy >= 0){
           //energy = energy * 100;
           int f = (int)(energy+media*media*media);
+          if (pinchosp.size() < circleNum){
+
           Pincho pincho = new Pincho(f, 3);
-          if(pinchos.size()<media*7){
+          if(pinchos.size()<media*7 && pinchos.size() < 10){
             pinchos.add(pincho);  
           }
-            
+          }
         }
       }
     }
@@ -135,7 +135,7 @@ void draw(){
   
   for(int i=0;i<pinchosp.size();i++){
     Pinchop pinchop = (Pinchop)pinchosp.get(i);
-    pinchop.draw();  
+    pinchop.draw();
   }
   for(int i=0;i<pinchosp.size();i++){
     Pinchop pinchop = (Pinchop)pinchosp.get(i);
@@ -144,13 +144,8 @@ void draw(){
   popMatrix();
   if(SAVEFRAME)
     saveFrame("rendering/brown-####.png");
-  //println(frameCount+" "+pinchos.size());
+  println(frameCount+" "+pinchos.size());
   if(frameCount>=STOPFRAME){
    exit(); 
   }
 }
-
-
-
-
-

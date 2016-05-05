@@ -13,6 +13,7 @@ class Pincho{
   
   int transp;
   
+  //初始化range个点，这些点的范围基于窗体的中心，然后在-step和+step之间
   Pincho(int range, int step){
     this.range = range;
     this.step = step;
@@ -58,16 +59,20 @@ class Pincho{
           
     }
     
+    //设置边框
     stroke(cor, transi);
+    //保留上次视图
     pushMatrix();
+    //平移上次视图
     translate(-width/2, -height/2, 0);
+    //画折线
     beginShape();
+    //println("length: " + points.length);
     for(int i = 0;i<points.length;i++){   
       x = points[i][0]; 
       y = points[i][1]; 
       z = points[i][2]; 
-      vertex(x,y,z);
- 
+      //vertex(x,y,z);
     }
     endShape();
     popMatrix();

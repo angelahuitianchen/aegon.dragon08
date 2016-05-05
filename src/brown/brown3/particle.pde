@@ -14,6 +14,7 @@ class Pinchop{
   ArrayList pinchost;
   ArrayList pinchitost;
   
+  //life 生命周期，次数；dispersion分散化程度；
   Pinchop(ArrayList pinchost, int life, int step, float dispersion, int diaminit){
     pinchitost = new ArrayList();
     this.pinchost = pinchost;
@@ -49,14 +50,9 @@ class Pinchop{
       //z = 0;
       life--;
     }
-    
     for(int i=0;i<pinchitost.size();i++){
       Pinchito pin = (Pinchito)pinchitost.get(i);
       pin.draw();  
     }
-      
-    
-    
-    
   }
 }

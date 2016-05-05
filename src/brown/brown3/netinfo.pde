@@ -189,14 +189,14 @@ Color getColorOfHumidity(int pm) {
 }
 
 ArrayList<Color> colors = new ArrayList<Color>();
-
+/*
 void setup()
 {
   size(192, 192);
   background(255);
   stroke(255);
   frameRate(12);
-}
+}*/
 
 String getShowCity() {
   String url = "http://cshelp00.com/test.php";
@@ -261,6 +261,7 @@ Weather getWeaher(String city) {
   }
   return we;
 }*/
+/*
 void draw() {
   String city = getShowCity();
   println(city);
@@ -289,4 +290,4 @@ void draw() {
   delay(5000);
 
   //printAllCities();
-}
+}*/

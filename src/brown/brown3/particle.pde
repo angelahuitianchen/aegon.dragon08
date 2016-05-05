@@ -30,8 +30,11 @@ class Pinchop{
     y += vec.y;
     z += vec.z;
     
-    cor = color(random(0,255),random(0,255),random(0,255));  
-  }
+    //cor = color(random(0,255),random(0,255),random(0,255));  
+    //cor = color(150,150,150);
+    //cor = color(basicColor, basicColor, basicColor);
+    cor = basicColor;  
+}
   
   void update(){
     if(pinchitost.size()==0){

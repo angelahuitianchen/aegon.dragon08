@@ -2,7 +2,7 @@ import processing.opengl.*;
 import javax.media.opengl.*;
 
 final boolean SAVEFRAME = true;
-final int STOPFRAME = 697;
+final int STOPFRAME = 20000;
 
 int circleNum = 300;
 

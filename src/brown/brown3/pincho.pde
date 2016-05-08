@@ -27,10 +27,8 @@ class Pincho{
       points[i][2]=z;
     }
     transp = (int)random(0,100);
-    //cor = color(random(200,255),random(0,200),random(0,100));  
-    //cor = color(200,200,200);  
-    cor = basicColor;  
-}
+    cor = color(random(200,255),random(0,200),random(0,100));  
+  }
   
   boolean fadein = true;
   boolean fadeout = false;

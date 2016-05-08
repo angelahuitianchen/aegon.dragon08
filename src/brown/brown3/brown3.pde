@@ -16,100 +16,6 @@ BufferedReader reader;
 ArrayList pinchos;
 ArrayList pinchosp;
 
-int color1 = 50;
-int color2 = 150;
-color basicColor = color(255, 0, 0);
-
-int [] clrs = {
-              color(255, 0, 0),    //red
-              color(0, 255, 0),    //green
-              color(0, 0, 255),    //blue
-              color(255, 0, 255),  //magenta
-              color(255, 255, 0),  //yellow
-              color(0, 255, 255),  //cyan
-              color(128, 0, 128)   //purple
-              };
-
-int [] typeColor = {
-                    color(255, 0, 0),  //AQI
-                    color(0, 255, 0),  //PM2.5
-                    color(0, 0, 255),  //PM10
-                    color(255, 0, 255),  //O3
-                    color(255, 255, 0),  //SO2
-                    color(0, 255, 255),  //CO
-                    color(128, 0, 128),  //NO2
-                    color(0, 128, 0)   //TEMP
-                    };
-int [] typeRange = {0,   
-                    3,  //AQI
-                    83,  //PM2.5
-                    86,  //PM10
-                    89,  //O3
-                    92,  //SO2
-                    95,  //CO
-                    97,  //SO2
-                    100  //TEMP
-                    };
-                    
-int getColorOfAQI(int aqi) { 
-  //(
-  return color(0, 0, 255); 
-}
-int getColorOfPM25(int pm25) { 
-  int clr = 0; 
-  if (pm25 < 60) {
-    clr = color(54, 246, 45);
-  } else if (pm25 < 120) {
-    clr = color(254, 249, 51);
-  } else if (pm25 < 199) {
-    clr = color(248, 42, 25);
-  } else if (pm25 < 399) {
-    clr = color(123, 34, 131);
-  } else {
-    clr = color(96, 52, 6);
-  }
-  return clr;
-}
-int getColorOfPM10(int pm10) { return color(0, 0, 255); }
-int getColorOfO3(int o3) { return color(255, 255, 0); }
-int getColorOfSO2(int so2) { return color(255, 0, 255); }
-int getColorOfCO(int co) { return color(0, 255, 255); }
-int getColorOfNO2(int no2) { return color(128, 0, 128); }
-int getColorOfTEMP(int temp) { return color(0, 128, 128); }
-
-int aqi = 0;
-int pm25 = 0;
-int pm10 = 0;
-int o3 = 0;
-int so2 = 0;
-int co = 0;
-int no2 = 0;
-int temp = 0;
-
-void updateColor() {
-  String city = (getShowCity());
-  Weather we = getWeaher(city);
-  
-  typeColor[0] = getColorOfAQI(we.get_pm25());
-  typeColor[1] = getColorOfPM25(we.get_pm25());
-  typeColor[2] = getColorOfPM10(pm10);
-  typeColor[3] = getColorOfO3(o3);
-  typeColor[4] = getColorOfSO2(so2);
-  typeColor[5] = getColorOfCO(co);
-  typeColor[6] = getColorOfNO2(no2);
-  typeColor[7] = getColorOfTEMP(temp);
-}
-                    
-int getColor() {
-  int rnd = (int)random(100);
-  for (int i=0; i!=typeRange.length -1; ++i){
-    if (rnd >= typeRange[i] && rnd < typeRange[i+1]) {
-      return typeColor[i];
-    }
-  }
-  return color(255, 0, 0);
-}
-
 void setup(){
   size(192, 192, OPENGL);
   hint(ENABLE_OPENGL_4X_SMOOTH);
@@ -138,25 +44,7 @@ void setup(){
 
 float rotating = 0;
 
-Color clr = new Color(255, 0, 0);
-
 void draw(){
-  if (second() % 5 == 0) {
-    thread("updateColor");
-  }
-  
-  /*int reminder = minute() * 60 + second();
-  reminder = reminder % 120;
-  reminder = (second() / 20) % 6;
-  int index = reminder % clrs.length;
-  //basicColor = clrs[index];*/
-  basicColor = getColor();
-  //basicColor = color(clr.r, clr.g, clr.b);
-  
-  
-  
-  
-  
   background(0);
   pgl = (PGraphicsOpenGL) g;
   gl = pgl.beginGL();
@@ -254,10 +142,10 @@ void draw(){
     pinchop.update();  
   }
   popMatrix();
-  //if(SAVEFRAME)
-  //  saveFrame("rendering/brown-####.png");
+  if(SAVEFRAME)
+    saveFrame("rendering/brown-####.png");
   println(frameCount+" "+pinchos.size());
-  /*if(frameCount>=STOPFRAME){
+  if(frameCount>=STOPFRAME){
    exit(); 
-  }*/
+  }
 }

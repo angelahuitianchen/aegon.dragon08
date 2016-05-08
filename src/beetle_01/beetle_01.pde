@@ -1,5 +1,3 @@
-import org.json.*;
-
 JSONArray json;
 JSONObject jsonObj;
 
@@ -90,8 +88,7 @@ Weather getWeaher(String city) {
   Weather we = new Weather();
   String url = "http://feed.aqicn.org/feed/" + city + "/en/feed.v1.json";
   try {
-    jsonObj = new JSONObject((loadStrings(url))[0]);
-    println(jsonObj);
+    jsonObj = loadJSONObject(url);
     try {
       we.set_date((jsonObj.getJSONObject("iaqi").getJSONObject("pm25").getString("date")));
     } catch (Exception e) {}
@@ -198,11 +195,13 @@ void setup()
   frameRate(12);
 }
 
+<<<<<<< HEAD
 String getShowCity() {
   String url = "http://cshelp00.com/test.php";
   String city = "beijing";
   try {
-    jsonObj = new JSONObject((loadStrings(url))[0]);
+    jsonObj = loadJSONObject(url);
+    println(jsonObj);
     city = jsonObj.getString("city");
   }
   catch(Exception e) {
@@ -210,7 +209,7 @@ String getShowCity() {
   }
   return city.toLowerCase();
 }
-/*
+
 Weather getWeaher(String city) {
   Weather we = new Weather();
   String url = "http://feed.aqicn.org/feed/" + city + "/en/feed.v1.json";
@@ -260,7 +259,8 @@ Weather getWeaher(String city) {
   catch(Exception e) {
   }
   return we;
-}*/
+}
+
 void draw() {
   String city = getShowCity();
   println(city);
@@ -288,5 +288,5 @@ void draw() {
 
   delay(5000);
 
-  //printAllCities();
+  printAllCities();
 }

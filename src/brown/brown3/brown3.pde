@@ -180,9 +180,13 @@ void draw(){
   } catch (IOException e) {
     e.printStackTrace();
     //line = null;
-    reader = createReader("fft.txt");
     try {
+    reader = createReader("fft.txt");
     line = reader.readLine();
+    if (line == null) {
+      println("read again failed");
+      exit();
+    }
     } catch(IOException e1) {}
   }
   //println(line);

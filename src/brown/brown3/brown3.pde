@@ -191,7 +191,7 @@ void draw(){
     } catch(IOException e1) {}
   }
   if (line == null) {
-    noLoop();
+    //noLoop();
   }
   
   //println(line);

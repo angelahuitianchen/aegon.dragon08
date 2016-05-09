@@ -179,7 +179,9 @@ void draw(){
     line = reader.readLine();
   } catch (IOException e) {
     e.printStackTrace();
-    line = null;
+    //line = null;
+    reader = createReader("fft.txt");
+    line = reader.readLine();
   }
   //println(line);
   if (line != null) {

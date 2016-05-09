@@ -195,7 +195,9 @@ void draw(){
     reader = createReader("fft.txt");
     line = reader.readLine();
     println(line);
-    } catch(IOException e1) {}
+    } catch(IOException e1) {
+      println("read again failed.");
+    }
     noLoop();
   }
   

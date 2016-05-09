@@ -183,7 +183,7 @@ void draw(){
     reader = createReader("fft.txt");
     try {
     line = reader.readLine();
-    } catch(IOException e) {}
+    } catch(IOException e1) {}
   }
   //println(line);
   if (line != null) {

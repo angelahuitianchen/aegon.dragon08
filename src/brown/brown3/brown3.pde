@@ -183,6 +183,7 @@ void draw(){
   }
   //println(line);
   if (line != null) {
+    println("have lines");
     
     String[] bandas = split(split(line, ":")[1], " ");
    

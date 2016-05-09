@@ -74,7 +74,7 @@ class Pincho{
       x = points[i][0]; 
       y = points[i][1]; 
       z = points[i][2]; 
-      //vertex(x,y,z);
+      vertex(x,y,z);
     }
     endShape();
     popMatrix();

@@ -185,6 +185,7 @@ void draw(){
     line = reader.readLine();
     if (line == null) {
       println("read again failed");
+      noLoop();
       exit();
     }
     } catch(IOException e1) {}

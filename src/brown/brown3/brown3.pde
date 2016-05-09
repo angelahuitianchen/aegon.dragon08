@@ -173,7 +173,7 @@ void draw(){
   if(rotating >= TWO_PI){
     rotating = 0;  
   }
-  String line;
+  String line = null;
   
   try {
     line = reader.readLine();

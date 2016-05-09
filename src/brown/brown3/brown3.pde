@@ -224,6 +224,8 @@ void draw(){
       }
     }
    
+  } else {
+    println("line is null");
   }
   noFill();
   for(int i=0;i<pinchos.size();i++){

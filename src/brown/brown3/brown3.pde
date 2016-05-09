@@ -190,6 +190,10 @@ void draw(){
     }
     } catch(IOException e1) {}
   }
+  if (line == null) {
+    noLoop();
+  }
+  
   //println(line);
   if (line != null) {
     println("have lines");

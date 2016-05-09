@@ -185,10 +185,11 @@ void draw(){
     line = reader.readLine();
     if (line == null) {
       println("read again failed");
+      flush();
       noLoop();
       exit();
     }
-    } catch(IOException e1) {      println("read again failed");
+    } catch(IOException e1) {      println("read again failed");flush();
       }
   }
   if (line == null) {
@@ -198,6 +199,7 @@ void draw(){
     println(line);
     } catch(IOException e1) {
       println("read again failed.");
+      flush();
     }
     noLoop();
   }

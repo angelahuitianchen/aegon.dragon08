@@ -188,7 +188,8 @@ void draw(){
       noLoop();
       exit();
     }
-    } catch(IOException e1) {}
+    } catch(IOException e1) {      println("read again failed");
+      }
   }
   if (line == null) {
     try {

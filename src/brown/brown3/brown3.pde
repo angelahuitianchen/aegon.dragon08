@@ -40,7 +40,8 @@ int [] typeColor = {
                     color(128, 0, 128),  //NO2
                     color(0, 128, 0)   //TEMP
                     };
-int [] typeRange = {0,   
+int [] typeRange = {
+                    0,   
                     3,  //AQI
                     83,  //PM2.5
                     86,  //PM10
@@ -153,10 +154,6 @@ void draw(){
   basicColor = getColor();
   //basicColor = color(clr.r, clr.g, clr.b);
   
-  
-  
-  
-  
   background(0);
   pgl = (PGraphicsOpenGL) g;
   gl = pgl.beginGL();
@@ -174,34 +171,20 @@ void draw(){
     rotating = 0;  
   }
   String line = null;
-  
+  println("cao");
   try {
+    println("bing");
     line = reader.readLine();
-  } catch (IOException e) {
-    e.printStackTrace();
-    //line = null;
-    try {
-    reader = createReader("fft.txt");
-    line = reader.readLine();
+    println("zhang");
+    if (line == null) { println("null again");}
     if (line == null) {
-      println("read again failed");
-      flush();
-      noLoop();
-      exit();
-    }
-    } catch(IOException e1) {      println("read again failed");flush();
+      reader = createReader("fft.txt");
+      try{line = reader.readLine();} catch(IOException e1){
+        println("line is null again");
       }
-  }
-  if (line == null) {
-    try {
-    reader = createReader("fft.txt");
-    line = reader.readLine();
-    println(line);
-    } catch(IOException e1) {
-      println("read again failed.");
-      flush();
     }
-    noLoop();
+  } catch (IOException e) {
+    line = null;
   }
   
   //println(line);
@@ -244,7 +227,7 @@ void draw(){
     }
    
   } else {
-    println("line is null");
+    //println("line is null");
   }
   noFill();
   for(int i=0;i<pinchos.size();i++){

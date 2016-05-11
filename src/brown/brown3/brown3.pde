@@ -4,7 +4,14 @@ import javax.media.opengl.*;
 final boolean SAVEFRAME = true;
 final int STOPFRAME = 20000;
 
+//circle number
 int circleNum = 300;
+//the rotate rate
+int rotateRate = 50;
+//windows width
+int width = 800;
+//windows height
+int height = 600;
 
 PGraphicsOpenGL pgl;
 GL gl;
@@ -112,7 +119,7 @@ int getColor() {
 }
 
 void setup(){
-  size(192, 192, OPENGL);
+  size(width, height, OPENGL);
   hint(ENABLE_OPENGL_4X_SMOOTH);
   
   reader = createReader("fft.txt");
@@ -120,7 +127,7 @@ void setup(){
   background(0);
   noStroke();
   noSmooth();
-  frameRate(150);
+  frameRate(rotateRate);
   blur = loadImage("glow_orb_solid.png");
   imageMode(CENTER);
   pinchos = new ArrayList();

@@ -1,3 +1,12 @@
+/*************************************************************************
+*
+* 	The program base on the former effort which site is 
+*	http://pmcruz.com/visual-experiments/revisiting-brownian-motion.
+*	And I remodified the program to connect the aqi variables with the
+*	brownian-motion many property, such as rotate rate, circle colors
+*	and so on.
+*
+***************************************************************************/
 import processing.opengl.*;
 import javax.media.opengl.*;
 

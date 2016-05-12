@@ -7,11 +7,11 @@ final int STOPFRAME = 20000;
 //circle number
 int circleNum = 300;
 //the rotate rate
-int rotateRate = 50;
+int rotateRate = 10;
 //windows width
-int width = 800;
+int width = 192;
 //windows height
-int height = 600;
+int height = 192;
 
 PGraphicsOpenGL pgl;
 GL gl;

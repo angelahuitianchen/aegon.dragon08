@@ -1,10 +1,26 @@
+/*************************************************************************
+*
+* 	The program base on the former effort which site is 
+*	http://pmcruz.com/visual-experiments/revisiting-brownian-motion.
+*	And I remodified the program to connect the aqi variables with the
+*	brownian-motion many property, such as rotate rate, circle colors
+*	and so on.
+*
+***************************************************************************/
 import processing.opengl.*;
 import javax.media.opengl.*;
 
 final boolean SAVEFRAME = true;
-final int STOPFRAME = 697;
+final int STOPFRAME = 20000;
 
+//circle number
 int circleNum = 300;
+//the rotate rate
+int rotateRate = 10;
+//windows width
+int width = 192;
+//windows height
+int height = 192;
 
 PGraphicsOpenGL pgl;
 GL gl;
@@ -40,7 +56,8 @@ int [] typeColor = {
                     color(128, 0, 128),  //NO2
                     color(0, 128, 0)   //TEMP
                     };
-int [] typeRange = {0,   
+int [] typeRange = {
+                    0,   
                     3,  //AQI
                     83,  //PM2.5
                     86,  //PM10
@@ -111,7 +128,7 @@ int getColor() {
 }
 
 void setup(){
-  size(192, 192, OPENGL);
+  size(width, height, OPENGL);
   hint(ENABLE_OPENGL_4X_SMOOTH);
   
   reader = createReader("fft.txt");
@@ -119,7 +136,7 @@ void setup(){
   background(0);
   noStroke();
   noSmooth();
-  frameRate(150);
+  frameRate(rotateRate);
   blur = loadImage("glow_orb_solid.png");
   imageMode(CENTER);
   pinchos = new ArrayList();
@@ -153,10 +170,6 @@ void draw(){
   basicColor = getColor();
   //basicColor = color(clr.r, clr.g, clr.b);
   
-  
-  
-  
-  
   background(0);
   pgl = (PGraphicsOpenGL) g;
   gl = pgl.beginGL();
@@ -173,16 +186,26 @@ void draw(){
   if(rotating >= TWO_PI){
     rotating = 0;  
   }
-  String line;
-  
+  String line = null;
+  println("cao");
   try {
+    println("bing");
     line = reader.readLine();
+    println("zhang");
+    if (line == null) { println("null again");}
+    if (line == null) {
+      reader = createReader("fft.txt");
+      try{line = reader.readLine();} catch(IOException e1){
+        println("line is null again");
+      }
+    }
   } catch (IOException e) {
-    e.printStackTrace();
     line = null;
   }
+  
   //println(line);
   if (line != null) {
+    println("have lines");
     
     String[] bandas = split(split(line, ":")[1], " ");
    
@@ -219,6 +242,8 @@ void draw(){
       }
     }
    
+  } else {
+    //println("line is null");
   }
   noFill();
   for(int i=0;i<pinchos.size();i++){

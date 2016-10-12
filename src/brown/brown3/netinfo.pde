@@ -199,7 +199,7 @@ void setup()
 }*/
 
 String getShowCity() {
-  String url = "http://cshelp00.com/test.php";
+  String url = "http://104.128.81.242/test.php";
   String city = "beijing";
   try {
     jsonObj = new JSONObject((loadStrings(url))[0]);
